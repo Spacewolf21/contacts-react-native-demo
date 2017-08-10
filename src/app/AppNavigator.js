@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { addNavigationHelpers } from 'react-navigation';
 import PropTypes from 'prop-types';
 
-import Navigator from './navigation';
+import Navigator from './StackNavigator';
 
 function AppNavigator({ dispatch, nav }) {
   return (

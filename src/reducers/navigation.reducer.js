@@ -1,4 +1,4 @@
-import Navigator from '../app/navigation';
+import Navigator from '../app/StackNavigator';
 
 const initialState = Navigator.router.getStateForAction(Navigator.router.getActionForPathAndParams('Contacts'));
 
