@@ -20,20 +20,32 @@ export function getContactsFailed(msg = null) {
 }
 
 export function getContactsFromApi() {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(startLoading());
-    getContacts()
-      .then((data) => {
-        dispatch(stopLoading());
-        return data;
-      })
-      .then((data) => {
-        const contacts = data.map(contact => Contact(contact));
-        dispatch(getContactsSuccess(contacts));
-      })
-      .catch((err) => {
-        dispatch(stopLoading());
-        dispatch(getContactsFailed(err));
-      });
+
+    try {
+      const rawContacts = await getContacts();
+      dispatch(stopLoading());
+      const contacts = rawContacts.map(contact => Contact(contact));
+      console.log(contacts);
+      dispatch(getContactsSuccess(contacts));
+    } catch (err) {
+      console.log('Error happened');
+      dispatch(stopLoading());
+      dispatch(getContactsFailed(err));
+    }
+    // getContacts()
+    //   .then((data) => {
+    //     dispatch(stopLoading());
+    //     return data;
+    //   })
+    //   .then((data) => {
+    //     const contacts = data.map(contact => Contact(contact));
+    //     dispatch(getContactsSuccess(contacts));
+    //   })
+    //   .catch((err) => {
+    //     dispatch(stopLoading());
+    //     dispatch(getContactsFailed(err));
+    //   });
   };
 }

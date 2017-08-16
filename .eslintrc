@@ -11,5 +11,8 @@
   },
   "globals": {
     "fetch": false
+  },
+  "env": {
+    "jest": true
   }
 }
